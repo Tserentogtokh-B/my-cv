@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Б. Цэрэнтогтох - CV</title>
+    <style>
+        /* CSS Хэсэг */
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary-color: #38bdf8;
+            --card-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: none; /* Custom cursor ашиглах тул үндсэн cursor-ыг нуух */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #334155;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="custom-cursor"></div>
+
+    <div class="container">
+        <header class="reveal">
+            <h1>Б. Цэрэнтогтох</h1>
+            <p>Мэдээллийн технологи & Сүлжээний инженер</p>
+        </header>
+
+        <section id="education" class="reveal">
+            <h2>Боловсрол</h2>
+            <div class="card">
+                <h3>Монгол Улсын Их Сургууль (МУИС)</h3>
+                <p style="color: #94a3b8;">Бакалаврын зэрэг | Оюутан</p>
+                <p>Програм хангамж, сүлжээний чиглэлээр гүнзгийрүүлэн суралцаж байгаа.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2>Ур чадвар</h2>
+            <div class="skills-grid">
+                <div class="skill-item">C / C++</div>
+                <div class="skill-item">JavaScript (HTML/CSS)</div>
+                <div class="skill-item">Cisco Packet Tracer</div>
+                <div class="skill-item">Routing & NAT</div>
+                <div class="skill-item">Memory Management</div>
+                <div class="skill-item">Git / VS Code</div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2>Онцлох Төслүүд</h2>
+            <div class="card">
+                <h3>Динамик санах ой хуваарилагч (Malloc Lab)</h3>
+                <p>C хэл дээр mm_init, mm_malloc болон coalesce функцүүдийг ашиглан санах ойн менежментийн системийг хөгжүүлсэн.</p>
+            </div>
+            <div class="card">
+                <h3>Сүлжээний урсгалын анализ</h3>
+                <p>Packet Tracer ашиглан чиглүүлэгч болон ISP хоорондын пакетуудын Layer 3/4 түвшний мэдээлэлд дүн шинжилгээ хийсэн.</p>
+            </div>
+            <div class="card">
+                <h3>Вэб хөгжүүлэлт</h3>
+                <p>Интерактив UI бүхий вэб төслүүд (Custom cursor, parallax effect, mobile menu) хөгжүүлсэн.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover хийх үед cursor томрох эффект
+        const cards = document.querySelectorAll('.card, .skill-item');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.backgroundColor = 'rgba(56, 189, 248, 0.2)';
+            });
+            card.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Scroll Reveal Animation Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 50;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Хуудас ачааллах үед шалгах
+    </script>
+</body>
+</html>
