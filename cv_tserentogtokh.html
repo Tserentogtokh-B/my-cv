@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV – Батбаяр Цэрэнтогтох</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f5f2ec;
+      --paper:    #fdfbf7;
+      --ink:      #1a1714;
+      --ink2:     #4a443d;
+      --ink3:     #8a8078;
+      --accent:   #c84b2f;
+      --accent2:  #e8884a;
+      --green:    #2d6a4f;
+      --line:     #e2ddd5;
+      --serif:    'Instrument Serif', Georgia, serif;
+      --sans:     'DM Sans', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        10px;
+    }
+
+    html { font-size: 15px; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--paper);
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(26,23,20,.10), 0 2px 8px rgba(26,23,20,.06);
+      overflow: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding: 3rem 3rem 2.5rem;
+      border-bottom: 1.5px solid var(--line);
+      background: linear-gradient(135deg, #fdfbf7 60%, #fdf0e8 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 5px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-radius: 0;
+    }
+
+    .hero-text { flex: 1; }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(200,75,47,.08);
+      border: 1px solid rgba(200,75,47,.2);
+      padding: .25rem .7rem;
+      border-radius: 4px;
+      margin-bottom: .9rem;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      margin-bottom: .4rem;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .subtitle {
+      font-size: .9rem;
+      color: var(--ink3);
+      font-weight: 400;
+      margin-bottom: 1.4rem;
+      letter-spacing: .01em;
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .ctag {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .78rem;
+      font-family: var(--mono);
+      color: var(--ink2);
+      text-decoration: none;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: .3rem .7rem;
+      border-radius: 6px;
+      transition: border-color .2s, color .2s;
+    }
+    .ctag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      flex-shrink: 0;
+      background: #e8e3da;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── BODY LAYOUT ── */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 270px;
+    }
+
+    main { padding: 2.5rem 2.5rem 2.5rem 3rem; border-right: 1.5px solid var(--line); }
+    .sidebar { padding: 2.5rem 2rem; }
+
+    .sec { margin-bottom: 2.2rem; }
+    .sec:last-child { margin-bottom: 0; }
+
+    .sec-label {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1rem;
+    }
+    .sec-label span {
+      font-family: var(--mono);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      font-size: .9rem;
+      color: var(--ink2);
+      line-height: 1.75;
+    }
+    .about strong { color: var(--ink); font-weight: 600; }
+
+    /* ── EDU ── */
+    .edu-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 1.1rem 1.3rem;
+    }
+    .edu-school { font-weight: 600; color: var(--ink); margin-bottom: .25rem; }
+    .edu-prog { font-size: .85rem; color: var(--ink2); margin-bottom: .7rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .pill {
+      font-family: var(--mono);
+      font-size: .72rem;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--ink2);
+    }
+    .pill.g { background: rgba(45,106,79,.08); border-color: rgba(45,106,79,.25); color: var(--green); }
+
+    #repos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+    .repo-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 1rem 1.1rem;
+      transition: border-color .2s, transform .2s;
+      cursor: default;
+    }
+    .repo-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+    .repo-name {
+      font-family: var(--mono);
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: .35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .repo-desc {
+      font-size: .78rem;
+      color: var(--ink3);
+      line-height: 1.5;
+      margin-bottom: .6rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .repo-meta { display: flex; gap: .8rem; }
+    .repo-lang {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--ink3);
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .lang-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+    .repo-star {
+      font-size: .68rem;
+      color: var(--ink3);
+      font-family: var(--mono);
+    }
+    .repo-loading {
+      grid-column: span 2;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--ink3);
+      padding: 1.5rem;
+      font-family: var(--mono);
+    }
+
+    /* ── MOTIVE ── */
+    .motive-box {
+      background: linear-gradient(135deg, rgba(200,75,47,.04), rgba(232,136,74,.04));
+      border: 1px solid rgba(200,75,47,.15);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r);
+      padding: 1.3rem 1.4rem 1.3rem 1.6rem;
+      position: relative;
+    }
+    .motive-q {
+      font-family: var(--serif);
+      font-size: 4rem;
+      color: rgba(200,75,47,.15);
+      line-height: 1;
+      position: absolute;
+      top: .3rem; left: .8rem;
+    }
+    .motive-text {
+      font-size: .88rem;
+      color: var(--ink2);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ── SIDEBAR ── */
+    .info-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .85rem;
+    }
+    .info-card:last-child { border-bottom: none; }
+    .info-lbl { color: var(--ink3); }
+    .info-val { font-weight: 500; color: var(--ink); }
+    .info-val.a { color: var(--accent); }
+    .info-val.g { color: var(--green); font-family: var(--mono); font-size: .82rem; }
+
+    /* ── SKILLS ── */
+    .skill-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 36px;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .75rem;
+    }
+    .skill-name { font-size: .82rem; color: var(--ink2); font-weight: 500; }
+    .bar-track {
+      height: 5px;
+      background: var(--line);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      animation: fillBar .8s ease forwards;
+      transform-origin: left;
+    }
+    @keyframes fillBar { from { width: 0 !important; } }
+    .skill-pct {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--ink3);
+      text-align: right;
+    }
+
+    /* ── LANG ── */
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .85rem;
+    }
+    .lang-row:last-child { border-bottom: none; }
+    .lang-name { color: var(--ink2); font-weight: 500; }
+    .lang-lvl {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--paper);
+      background: var(--accent);
+      padding: .15rem .55rem;
+      border-radius: 4px;
+    }
+
+    /* ── TAGS ── */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .tag {
+      font-size: .75rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink2);
+      padding: .28rem .65rem;
+      border-radius: 6px;
+      transition: border-color .2s;
+    }
+    .tag:hover { border-color: var(--accent2); }
+
+    /* ── PRINT BUTTON ── */
+    .fab {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .75rem 1.4rem;
+      border-radius: 99px;
+      font-family: var(--sans);
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(200,75,47,.35);
+      transition: transform .2s, box-shadow .2s;
+      z-index: 99;
+    }
+    .fab:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(200,75,47,.45); }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .shell { box-shadow: none; border-radius: 0; max-width: 100%; }
+      .fab { display: none; }
+      .hero { background: #fff; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .cols { grid-template-columns: 1fr; }
+      main { border-right: none; border-bottom: 1.5px solid var(--line); padding: 2rem 1.5rem; }
+      .sidebar { padding: 2rem 1.5rem; }
+      .hero { flex-direction: column-reverse; align-items: flex-start; padding: 2rem 1.5rem; }
+      h1 { font-size: 2rem; }
+      #repos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="hero">
+    <div class="hero-text">
+      <h1><em>Батбаяр</em> Цэрэнтогтох</h1>
+      <p class="subtitle">Компьютерын ухаан · 3-р түвшин · МУИС</p>
+      <div class="contacts">
+        <a class="ctag" href="tel:+97686230993">📞 +976 86230993</a>
+        <a class="ctag" href="mailto:tserentogtoh1119@gmail.com">✉️ tserentogtoh1119@gmail.com</a>
+        <a class="ctag" href="https://github.com/Tserentogtokh-B" target="_blank">⬡ github.com/Tserentogtokh-B</a>
+        <span class="ctag">📍 Улаанбаатар</span>
+      </div>
+    </div>
+    <div class="avatar">
+      <img src="./photos/1.jpg" alt="Батбаяр" onerror="this.style.display='none';this.parentElement.textContent='БЦ'">
+    </div>
+  </header>
+
+  <div class="cols">
+    <main>
+
+      <div class="sec">
+        <div class="sec-label"><span>Хувийн танилцуулга</span></div>
+        <p class="about">
+          Би <strong>компьютерын ухааны</strong> чиглэлээр суралцаж буй гуравдугаар түвшний оюутан.
+          Мэргэжлийн хүрээнд машин сургалт болон алгоритмын бодлогууд бодох сонирхолтой бөгөөд
+          шинэ зүйл сурах, асуудал шийдвэрлэх дуртай. Багаар ажиллах чадвартай, харилцааны соёлтой. Бодит төслүүд дээр 
+          ажиллаж илүү их зүйл суралцах, найрсаг хамт олонтой болж, хамтдаа өсөн дэвжих хүсэл эрмэлзэлтэй.
+        </p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>Боловсрол</span></div>
+        <div class="edu-card">
+          <div class="edu-school">Монгол Улсын Их Сургууль (МУИС)</div>
+          <div class="edu-prog">Компьютерын ухаан · Мэдээлэл, Компьютерын ухааны тэнхим</div>
+          <div class="pills">
+            <span class="pill">3-р түвшин</span>
+            <span class="pill">2023 – одоо</span>
+            <span class="pill g">GPA: 3.5 / 4.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>GitHub төслүүд</span></div>
+        <div id="repos-grid">
+          <div class="repo-loading">⟳ GitHub-аас ачаалж байна…</div>
+        </div>
+      </div>
+
+<div class="sec">
+  <div class="sec-label"><span>Туршлага</span></div>
+
+  <!-- 2025 оны туршлага -->
+  <div class="edu-card" style="margin-bottom: 1rem;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div class="edu-school">Хиймэл Оюун Ухааны Улсын Олимпиад</div>
+      <span class="pill" style="margin: 0;">2025</span>
+    </div>
+    <div class="edu-prog" style="color: var(--accent); font-weight: 500;">Зөвлөх багш</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label"><span>Шагнал болон Тэтгэлэг</span></div>
+  <div style="display: grid; gap: 0.6rem;">
+    <!-- Тэтгэлэгүүд -->
+    <div class="edu-card" style="padding: 0.8rem 1.1rem; border-left: 3px solid var(--green);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 0.9rem; font-weight: 600;">MCS Group Тэтгэлэг (2024 намар)</div>
+      </div>
+    </div>
+    
+    <div class="edu-card" style="padding: 0.8rem 1.1rem; border-left: 3px solid var(--green);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 0.9rem; font-weight: 600;">Teso Group Тэтгэлэг (2025 намар)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </main>
+
+    <aside class="sidebar">
+
+      <div class="sec">
+        <div class="sec-label"><span>Сурлагын мэдээлэл</span></div>
+        <div class="info-card"><div class="info-lbl">Сургууль</div><div class="info-val">МУИС</div></div>
+        <div class="info-card"><div class="info-lbl">Хөтөлбөр</div><div class="info-val">Компьютерын ухаан</div></div>
+        <div class="info-card"><div class="info-lbl">Түвшин</div><div class="info-val a">3-р түвшин</div></div>
+        <div class="info-card"><div class="info-lbl">Голч дүн</div><div class="info-val g">3.5 / 4.0</div></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>Ур чадвар</span></div>
+        <div class="skill-row">
+          <div class="skill-name">C / C++</div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%;animation-delay:.1s"></div></div>
+          <div class="skill-pct">90%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">PostgreSQL</div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%;animation-delay:.2s"></div></div>
+          <div class="skill-pct">80%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">HTML / CSS</div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%;animation-delay:.3s"></div></div>
+          <div class="skill-pct">80%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Python</div>
+          <div class="bar-track"><div class="bar-fill" style="width:70%;animation-delay:.4s"></div></div>
+          <div class="skill-pct">70%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">JavaScript</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;animation-delay:.5s"></div></div>
+          <div class="skill-pct">50%</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>Soft skill</span></div>
+        <div class="tag-cloud">
+          <span class="tag">Багаар ажиллах</span>
+          <span class="tag">Эерэг хандлага</span>
+          <span class="tag">Асуудал шийдвэрлэх</span>
+          <span class="tag">Дасан зохицох</span>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>Хэл</span></div>
+        <div class="lang-row"><div class="lang-name">Монгол</div><div class="lang-lvl" style="background:#2d6a4f">Эх хэл</div></div>
+        <div class="lang-row" style="align-items: flex-start; flex-direction: column; gap: 0.4rem; padding-top: 0.8rem;">
+          <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+            <div class="lang-name">Англи</div>
+            <div class="lang-lvl">B1(уншиж ойлгох)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-label"><span>Сонирхол</span></div>
+        <div class="tag-cloud">
+          <span class="tag">AI / ML</span>
+          <span class="tag">Aялах</span>
+          <span class="tag">Volleyball</span>
+          <span class="tag">Ууланд алхах</span>
+          <span class="tag">Ном унших</span>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<button class="fab" onclick="window.print()">⬇ PDF болгох</button>
+
+<script>
+(async () => {
+  const grid = document.getElementById('repos-grid');
+  const LANG_COLORS = {
+    JavaScript: '#f1e05a', Python: '#3572A5', 'C++': '#f34b7d',
+    C: '#555555', HTML: '#e34c26', CSS: '#563d7c', TypeScript: '#2b7489',
+    Jupyter: '#DA5B0B', default: '#8a8078'
+  };
+
+  try {
+    const res = await fetch('https://api.github.com/users/Tserentogtokh-B/repos?sort=updated&per_page=20');
+    if (!res.ok) throw new Error('GitHub API error');
+    const repos = await res.json();
+
+    const filtered = repos
+      .filter(r => !r.fork && r.name !== 'Tserentogtokh-B')
+      .sort((a, b) => (b.stargazers_count + b.forks_count) - (a.stargazers_count + a.forks_count))
+      .slice(0, 4);
+
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="repo-loading">Олдсон репо байхгүй байна.</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(r => `
+      <div class="repo-card" onclick="window.open('${r.html_url}','_blank')">
+        <div class="repo-name">⬡ ${r.name}</div>
+        <div class="repo-desc">${r.description || 'Тайлбар байхгүй'}</div>
+        <div class="repo-meta">
+          ${r.language ? `<div class="repo-lang">
+            <span class="lang-dot" style="background:${LANG_COLORS[r.language] || LANG_COLORS.default}"></span>
+            ${r.language}
+          </div>` : ''}
+          ${r.stargazers_count ? `<div class="repo-star">★ ${r.stargazers_count}</div>` : ''}
+        </div>
+      </div>
+    `).join('');
+  } catch {
+    grid.innerHTML = `
+      <div class="repo-loading">
+        GitHub-аас ачаалах боломжгүй байна.<br>
+        <a href="https://github.com/Tserentogtokh-B" target="_blank" style="color:var(--accent);font-size:.8rem;">github.com/Tserentogtokh-B →</a>
+      </div>`;
+  }
+})();
+</script>
+</body>
+</html>
