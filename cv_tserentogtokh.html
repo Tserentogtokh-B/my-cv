@@ -182,6 +182,7 @@
       border-radius: var(--r);
       padding: 1.1rem 1.3rem;
     }
+
     .edu-school { font-weight: 600; color: var(--ink); margin-bottom: .25rem; }
     .edu-prog { font-size: .85rem; color: var(--ink2); margin-bottom: .7rem; }
     .pills { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -199,7 +200,8 @@
     #repos-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: .8rem;
+      grid-auto-rows: 1fr; /* Энэ мөр нь бүх мөрийн өндрийг ижил болгоно */
+      gap: 1rem;
     }
     .repo-card {
       background: var(--bg);
@@ -378,6 +380,111 @@
       transition: transform .2s, box-shadow .2s;
       z-index: 99;
     }
+
+
+    @media print {
+  @page {
+    size: A4;
+    margin: 11mm; /* 10 болон 12-ын дундаж */
+  }
+
+  html { font-size: 13.5px; } /* 13 болон 14-ийн дундаж */
+
+  body {
+    padding: 0;
+    background: #fff;
+  }
+
+  .shell {
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 1.6rem 2rem 1.2rem;
+    gap: 1.2rem;
+  }
+
+  h1 { font-size: 2rem; }
+  .subtitle { margin-bottom: 0.8rem; }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+  }
+
+  /* ── MAIN / SIDEBAR ── */
+  main {
+    padding: 1.8rem 1.8rem 1.8rem 2.2rem;
+  }
+
+  .sidebar {
+    padding: 1.8rem 1.4rem;
+  }
+
+  /* ── SPACING ── */
+  .sec { margin-bottom: 1.4rem; }
+  .sec-label { margin-bottom: 0.7rem; }
+
+  /* ── Текст ── */
+  .about {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  /* ── Cards ── */
+  .edu-card {
+    padding: 0.8rem 1rem;
+  }
+
+  /* ── Repos ── */
+  #repos-grid {
+    gap: 0.6rem;
+  }
+
+  .repo-card {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .repo-desc {
+    -webkit-line-clamp: 2; /* Хоёр мөрөндөө байх нь мэдээлэл өгөхөд илүү цэгцтэй */
+  }
+
+  /* ── Skills ── */
+  .skill-row {
+    margin-bottom: 0.5rem;
+  }
+
+  .bar-track {
+    height: 4.5px;
+  }
+
+  /* ── Info & Languages ── */
+  .info-card {
+    padding: 0.38rem 0;
+  }
+
+  .lang-row {
+    padding: 0.35rem 0;
+  }
+
+  /* ── Tags ── */
+  .tag {
+    padding: 0.22rem 0.55rem;
+    font-size: 0.71rem;
+  }
+
+  .fab {
+    display: none;
+  }
+
+  /* Хуудас тасрахаас сэргийлэх */
+  .sec, .edu-card, .repo-card {
+    page-break-inside: avoid;
+  }
+}
     .fab:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(200,75,47,.45); }
 
     /* ── PRINT ── */
@@ -575,10 +682,10 @@
     if (!res.ok) throw new Error('GitHub API error');
     const repos = await res.json();
 
+    const targetNames = [ 'hand_gesture_game', 'digger_game', 'warehouse_robots-', 'player_vs_agent_games'];
     const filtered = repos
-      .filter(r => !r.fork && r.name !== 'Tserentogtokh-B')
-      .sort((a, b) => (b.stargazers_count + b.forks_count) - (a.stargazers_count + a.forks_count))
-      .slice(0, 4);
+      .filter(r => targetNames.includes(r.name))
+      .sort((a, b) => targetNames.indexOf(a.name) - targetNames.indexOf(b.name));
 
     if (!filtered.length) {
       grid.innerHTML = '<div class="repo-loading">Олдсон репо байхгүй байна.</div>';
@@ -586,16 +693,19 @@
     }
 
     grid.innerHTML = filtered.map(r => `
-      <div class="repo-card" onclick="window.open('${r.html_url}','_blank')">
-        <div class="repo-name">⬡ ${r.name}</div>
-        <div class="repo-desc">${r.description || 'Тайлбар байхгүй'}</div>
-        <div class="repo-meta">
-          ${r.language ? `<div class="repo-lang">
-            <span class="lang-dot" style="background:${LANG_COLORS[r.language] || LANG_COLORS.default}"></span>
-            ${r.language}
-          </div>` : ''}
-          ${r.stargazers_count ? `<div class="repo-star">★ ${r.stargazers_count}</div>` : ''}
-        </div>
+      <div class="repo-card" onclick="window.open('${r.html_url}','_blank')" style="cursor:pointer;">
+        <a href="${r.html_url}" target="_blank" 
+          style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
+          <div class="repo-name">⬡ ${r.name}</div>
+          <div class="repo-desc" style="flex:1;">${r.description || 'Тайлбар байхгүй'}</div>
+          <div class="repo-meta">
+            ${r.language ? `<div class="repo-lang">
+              <span class="lang-dot" style="background:${LANG_COLORS[r.language] || LANG_COLORS.default}"></span>
+              ${r.language}
+            </div>` : ''}
+            ${r.stargazers_count ? `<div class="repo-star">★ ${r.stargazers_count}</div>` : ''}
+          </div>
+        </a>
       </div>
     `).join('');
   } catch {
